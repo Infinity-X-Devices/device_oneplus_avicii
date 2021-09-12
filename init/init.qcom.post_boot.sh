@@ -3915,15 +3915,11 @@ case "$target" in
         # Enable conservative pl
         echo 1 > /proc/sys/kernel/sched_conservative_pl
 
-        echo "0:1228800" > /sys/devices/system/cpu/cpu_boost/input_boost_freq
-        echo 120 > /sys/devices/system/cpu/cpu_boost/input_boost_ms
-
         # Set Memory parameters
         configure_memory_parameters
 
         if [ `cat /sys/devices/soc0/revision` == "2.0" ]; then
              # r2.0 related changes
-             echo "0:1075200" > /sys/devices/system/cpu/cpu_boost/input_boost_freq
              echo 610000 > /sys/devices/system/cpu/cpufreq/policy0/schedutil/rtg_boost_freq
              echo 1075200 > /sys/devices/system/cpu/cpufreq/policy0/schedutil/hispeed_freq
              echo 1152000 > /sys/devices/system/cpu/cpufreq/policy6/schedutil/hispeed_freq
@@ -4075,9 +4071,6 @@ case "$target" in
 
         # Enable conservative pl
         echo 1 > /proc/sys/kernel/sched_conservative_pl
-
-        echo "0:1248000" > /sys/devices/system/cpu/cpu_boost/input_boost_freq
-        echo 120 > /sys/devices/system/cpu/cpu_boost/input_boost_ms
 
         # Set Memory parameters
         configure_memory_parameters
