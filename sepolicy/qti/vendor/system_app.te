@@ -6,3 +6,6 @@ binder_call(system_app, rild)
 # Allow system_app to access HBM node
 allow system_app vendor_sysfs_graphics:dir search;
 allow system_app vendor_sysfs_graphics:file rw_file_perms;
+
+# Gamespace
+r_dir_file(system_app, vendor_sysfs_sde_crtc)
