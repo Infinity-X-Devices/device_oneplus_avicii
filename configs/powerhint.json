@@ -415,85 +415,85 @@
     {
       "PowerHint": "INTERACTION",
       "Node": "SchedtuneTABoost",
-      "Duration": 0,
+      "Duration": 1000,
       "Value": "30"
     },
     {
       "PowerHint": "INTERACTION",
       "Node": "SchedBusyHystNs",
-      "Duration": 0,
+      "Duration": 1000,
       "Value": "99000000"
     },
     {
       "PowerHint": "INTERACTION",
       "Node": "SchedBusyHystEnableCPUs",
-      "Duration": 0,
+      "Duration": 1000,
       "Value": "255"
     },
     {
       "PowerHint": "INTERACTION",
       "Node": "SchedMinTaskUtilForBoost",
-      "Duration": 0,
+      "Duration": 1000,
       "Value": "0"
     },
     {
       "PowerHint": "INTERACTION",
       "Node": "SchedMinTaskUtilForColoc",
-      "Duration": 0,
+      "Duration": 1000,
       "Value": "0"
     },
     {
       "PowerHint": "INTERACTION",
       "Node": "CPUBWHystTriggerCount",
-      "Duration": 0,
+      "Duration": 1000,
       "Value": "0"
     },
     {
       "PowerHint": "INTERACTION",
       "Node": "CPUBWHystLength",
-      "Duration": 0,
+      "Duration": 1000,
       "Value": "0"
     },
     {
       "PowerHint": "INTERACTION",
       "Node": "CPUBWHistMemory",
-      "Duration": 0,
+      "Duration": 1000,
       "Value": "0"
     },
     {
       "PowerHint": "INTERACTION",
       "Node": "CPUBWMinFreq",
-      "Duration": 0,
+      "Duration": 1000,
       "Value": "3879"
     },
     {
       "PowerHint": "INTERACTION",
       "Node": "LLCCBWHystTriggerCount",
-      "Duration": 0,
+      "Duration": 1000,
       "Value": "0"
     },
     {
       "PowerHint": "INTERACTION",
       "Node": "LLCCBWHystLength",
-      "Duration": 0,
+      "Duration": 1000,
       "Value": "0"
     },
     {
       "PowerHint": "INTERACTION",
       "Node": "LLCCBWHistMemory",
-      "Duration": 0,
+      "Duration": 1000,
       "Value": "0"
     },
     {
       "PowerHint": "INTERACTION",
       "Node": "LLCCBWMinFreq",
-      "Duration": 0,
+      "Duration": 1000,
       "Value": "7110"
     },
     {
       "PowerHint": "INTERACTION",
       "Node": "L3MinFreq",
-      "Duration": 0,
+      "Duration": 1000,
       "Value": "940800000"
     },
     {
