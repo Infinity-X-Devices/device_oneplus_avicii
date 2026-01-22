@@ -347,9 +347,7 @@ PRODUCT_USE_DYNAMIC_PARTITIONS := true
 
 # Power
 PRODUCT_PACKAGES += \
-    android.hardware.power-service-qti \
-    android.hardware.power@1.2.vendor \
-    vendor.qti.hardware.perf@2.2.vendor
+    android.hardware.power-service.lineage-libperfmgr
 
 $(call soong_config_set,qtipower,tap_to_wake_node,/proc/touchpanel/double_tap_enable)
 
@@ -402,7 +400,10 @@ PRODUCT_SHIPPING_API_LEVEL := 29
 
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += \
-    $(LOCAL_PATH)
+    $(LOCAL_PATH) \
+    hardware/google/interfaces \
+    hardware/google/pixel \
+    hardware/lineage/interfaces/power-libperfmgr
 
 # Telephony
 PRODUCT_PACKAGES += \
@@ -471,7 +472,6 @@ SPAMMY_LOG_TAGS := \
     android.hardware.light-V2-ndk.vendor \
     vibratorfeature-wrapper \
     android.hardware.vibrator-V1-ndk_platform.vendor \
-    libqti-perfd-client \
     BATTERY_CHG \
     BackgroundInstallControlService \
     BackupTransportManager \

@@ -241,10 +241,6 @@ debug.stagefright.c2inputsurface=-1
 # Netflix
 ro.netflix.bsp_rev=Q7250-19133-1
 
-# Perf
-ro.vendor.extension_library=libqti-perfd-client.so
-vendor.perf.framepacing.enable=1
-
 # Qualcomm System Daemon
 persist.vendor.qcomsysd.enabled=1
 
