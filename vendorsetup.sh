@@ -17,14 +17,16 @@ FW_DIR="${SRC_DIR}/vendor/oneplus/firmware";
 KERNEL_DIR="${SRC_DIR}/kernel/oneplus/avicii";
 VENDOR_DIR="${SRC_DIR}/vendor/oneplus/avicii";
 CAM_DIR="${SRC_DIR}/vendor/oneplus/camera";
+DOLBY_DIR="${SRC_DIR}/hardware/dolby";
 CLANG_TAR="https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/heads/main/clang-${CLANG_VERSION}.tar.gz";
 FW_REPO="https://codeberg.org/sreeshankark/android_vendor_oneplus_firmware";
 KERNEL_REPO="https://github.com/sreeshankark/android_kernel_oneplus_avicii";
 VENDOR_REPO="https://github.com/sreeshankark/android_vendor_oneplus_avicii";
 CAM_REPO="https://codeberg.org/sreeshankark/android_vendor_oneplus_camera";
+DOLBY_REPO="https://github.com/sreeshankark/hardware_dolby -b sony-1.2";
 
 # Dependencies
-DEPENDENCIES=( "FW" "KERNEL" "VENDOR" "CAM" );
+DEPENDENCIES=( "FW" "KERNEL" "VENDOR" "CAM" "DOLBY" );
 
 # Check if the dependency is available in the correct path
 function chk_dependencies() {
@@ -51,6 +53,11 @@ do
 		DIR="${CAM_DIR}";
 		REPO="${CAM_REPO}";
 		NAME="OnePlus Camera";
+	elif [ ${DEPENDENCY} = "DOLBY" ];
+        then
+                DIR="${DOLBY_DIR}";
+                REPO="${DOLBY_REPO}";
+                NAME="Dolby source";
 	else
 		echo -e "${R}Invalid Dependency${N}";
 	fi
