@@ -19,11 +19,15 @@
           package="org.lineageos.settings.device">
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="com.android.systemui.permission.PLUGIN" />
+
+    <protected-broadcast android:name="com.android.systemui.doze.pulse" />
+    <protected-broadcast android:name="org.lineageos.settings.UPDATE_SETTINGS" />
 
     <application
         android:icon="@mipmap/ic_launcher"
         android:label="@string/device_settings_app_name"
-        android:theme="@style/Theme.SubSettingsBase"
+        android:theme="@style/Theme.SubSettingsBase.Expressive"
         android:defaultToDeviceProtectedStorage="true"
         android:directBootAware="true">
 
@@ -43,7 +47,7 @@
         <activity
             android:name=".ButtonSettingsActivity"
             android:label="@string/button_panel_title"
-            android:exported="true">
+            android:exported="false">
             <intent-filter>
                 <action android:name="org.lineageos.settings.device.ADDITIONAL_BUTTONS_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -51,8 +55,16 @@
         </activity>
 
         <service
+            android:name=".AlertSliderPlugin"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.android.systemui.action.PLUGIN_OVERLAY" />
+            </intent-filter>
+        </service>
+
+        <service
             android:name=".KeyHandler"
             android:permission="KeyHandlerService"
-            android:exported="true" />
+            android:exported="false" />
     </application>
 </manifest>

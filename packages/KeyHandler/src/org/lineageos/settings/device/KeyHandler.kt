@@ -15,11 +15,9 @@ import android.media.AudioSystem
 import android.os.VibrationAttributes
 import android.os.VibrationEffect
 import android.os.Vibrator
-import android.os.UserHandle
 import android.provider.Settings
 import android.view.KeyEvent
 import com.android.internal.os.DeviceKeyHandler
-
 import java.io.File
 import java.util.concurrent.Executors
 
@@ -28,35 +26,35 @@ class KeyHandler(private val context: Context) : DeviceKeyHandler {
     private val notificationManager = context.getSystemService(NotificationManager::class.java)!!
     private val vibrator = context.getSystemService(Vibrator::class.java)!!
 
-    private val packageContext = context.createPackageContext(
-        KeyHandler::class.java.getPackage()!!.name, 0
-    )
+    private val packageContext =
+        context.createPackageContext(KeyHandler::class.java.getPackage()!!.name, 0)
     private val sharedPreferences
-        get() = packageContext.getSharedPreferences(
-            packageContext.packageName + "_preferences",
-            Context.MODE_PRIVATE or Context.MODE_MULTI_PROCESS
-        )
+        get() =
+            packageContext.getSharedPreferences(
+                packageContext.packageName + "_preferences",
+                Context.MODE_PRIVATE or Context.MODE_MULTI_PROCESS,
+            )
 
     private val executorService = Executors.newSingleThreadExecutor()
 
     private var wasMuted = false
-    private val broadcastReceiver = object : BroadcastReceiver() {
-        override fun onReceive(context: Context, intent: Intent) {
-            when (intent.action) {
-                AudioManager.STREAM_MUTE_CHANGED_ACTION -> {
-                    val stream = intent.getIntExtra(AudioManager.EXTRA_VOLUME_STREAM_TYPE, -1)
-                    val state = intent.getBooleanExtra(
-                        AudioManager.EXTRA_STREAM_VOLUME_MUTED, false
-                    )
-                    if (stream == AudioSystem.STREAM_MUSIC && !state) {
-                        wasMuted = false
+    private val broadcastReceiver =
+        object : BroadcastReceiver() {
+            override fun onReceive(context: Context, intent: Intent) {
+                when (intent.action) {
+                    AudioManager.STREAM_MUTE_CHANGED_ACTION -> {
+                        val stream = intent.getIntExtra(AudioManager.EXTRA_VOLUME_STREAM_TYPE, -1)
+                        val state =
+                            intent.getBooleanExtra(AudioManager.EXTRA_STREAM_VOLUME_MUTED, false)
+                        if (stream == AudioSystem.STREAM_MUSIC && !state) {
+                            wasMuted = false
+                        }
                     }
-                }
 
-                Intent.ACTION_BOOT_COMPLETED -> populateKeyState(false)
+                    Intent.ACTION_BOOT_COMPLETED -> populateKeyState(true)
+                }
             }
         }
-    }
 
     init {
         context.registerReceiver(
@@ -64,7 +62,7 @@ class KeyHandler(private val context: Context) : DeviceKeyHandler {
             IntentFilter().apply {
                 addAction(AudioManager.STREAM_MUTE_CHANGED_ACTION)
                 addAction(Intent.ACTION_BOOT_COMPLETED)
-            }
+            },
         )
     }
 
@@ -79,79 +77,41 @@ class KeyHandler(private val context: Context) : DeviceKeyHandler {
             return event
         }
 
-        populateKeyState(true)
+        populateKeyState(false)
 
         return null
     }
 
-    private fun populateKeyState(vibrate: Boolean) {
-        val position = when (File("/proc/tristatekey/tri_state").readText().trim()) {
-            "1" -> POSITION_TOP
-            "2" -> POSITION_MIDDLE
-            "3" -> POSITION_BOTTOM
-            else -> return
+    private fun populateKeyState(firstRun: Boolean) {
+        when (File("/proc/tristatekey/tri_state").readText().trim()) {
+            "1" -> handleMode(POSITION_TOP, firstRun)
+            "2" -> handleMode(POSITION_MIDDLE, firstRun)
+            "3" -> handleMode(POSITION_BOTTOM, firstRun)
         }
-        
-        handleMode(position, vibrate)
-    }
-
-    private fun broadcastSliderPosition(position: Int, mode: Int) {
-        val positionValue = when (mode) {
-            AudioManager.RINGER_MODE_SILENT -> MODE_SILENT      // 0 -> 620
-            AudioManager.RINGER_MODE_VIBRATE -> MODE_VIBRATE    // 1 -> 604
-            AudioManager.RINGER_MODE_NORMAL -> MODE_RING        // 2 -> 605
-            ZEN_PRIORITY_ONLY -> MODE_PRIORITY_ONLY             // 3 -> 602
-            ZEN_TOTAL_SILENCE -> MODE_TOTAL_SILENCE             // 4 -> 600
-            ZEN_ALARMS_ONLY -> MODE_ALARMS_ONLY                 // 5 -> 601
-            else -> {
-                android.util.Log.e(TAG, "Unknown mode: $mode, defaulting to MODE_SILENT")
-                MODE_SILENT
-            }
-        }
-        
-        val broadcastPosition = position - 1
-        
-        android.util.Log.d(TAG, "=== SLIDER BROADCAST ===")
-        android.util.Log.d(TAG, "Physical position: $position")
-        android.util.Log.d(TAG, "Broadcast position: $broadcastPosition")
-        android.util.Log.d(TAG, "AudioManager mode: $mode")
-        android.util.Log.d(TAG, "NordLab positionValue: $positionValue")
-        android.util.Log.d(TAG, "Action: $ACTION_UPDATE_SLIDER_POSITION")
-        
-        val intent = Intent(ACTION_UPDATE_SLIDER_POSITION).apply {
-            putExtra(EXTRA_SLIDER_POSITION, broadcastPosition)
-            putExtra(EXTRA_SLIDER_POSITION_VALUE, positionValue)
-            addFlags(Intent.FLAG_RECEIVER_REGISTERED_ONLY)
-        }
-        context.sendBroadcast(intent)
-        
-        android.util.Log.d(TAG, "Broadcast sent successfully")
     }
 
     private fun vibrateIfNeeded(mode: Int) {
         when (mode) {
-            AudioManager.RINGER_MODE_VIBRATE -> vibrator.vibrate(
-                MODE_VIBRATION_EFFECT,
-                HARDWARE_FEEDBACK_VIBRATION_ATTRIBUTES
-            )
-            AudioManager.RINGER_MODE_NORMAL -> vibrator.vibrate(
-                MODE_NORMAL_EFFECT,
-                HARDWARE_FEEDBACK_VIBRATION_ATTRIBUTES
-            )
+            AudioManager.RINGER_MODE_VIBRATE ->
+                vibrator.vibrate(MODE_VIBRATION_EFFECT, HARDWARE_FEEDBACK_VIBRATION_ATTRIBUTES)
+            AudioManager.RINGER_MODE_NORMAL ->
+                vibrator.vibrate(MODE_NORMAL_EFFECT, HARDWARE_FEEDBACK_VIBRATION_ATTRIBUTES)
         }
     }
 
-    private fun handleMode(position: Int, vibrate: Boolean) {
+    private fun handleMode(position: Int, firstRun: Boolean) {
         val muteMedia = sharedPreferences.getBoolean(MUTE_MEDIA_WITH_SILENT, false)
+        val showDialog = sharedPreferences.getBoolean(SHOW_DIALOG, true)
 
-        val mode = when (position) {
-            POSITION_TOP -> sharedPreferences.getString(ALERT_SLIDER_TOP_KEY, "0")!!.toInt()
-            POSITION_MIDDLE -> sharedPreferences.getString(ALERT_SLIDER_MIDDLE_KEY, "1")!!.toInt()
-            POSITION_BOTTOM -> sharedPreferences.getString(ALERT_SLIDER_BOTTOM_KEY, "2")!!.toInt()
-            else -> return
-        }
-
-        broadcastSliderPosition(position, mode)
+        val mode =
+            when (position) {
+                POSITION_TOP -> sharedPreferences.getString(ALERT_SLIDER_TOP_KEY, "0")!!.toInt()
+                POSITION_MIDDLE ->
+                    sharedPreferences.getString(ALERT_SLIDER_MIDDLE_KEY, "1")!!.toInt()
+                POSITION_BOTTOM ->
+                    sharedPreferences.getString(ALERT_SLIDER_BOTTOM_KEY, "2")!!.toInt()
+                else -> return
+            }
 
         executorService.submit {
             when (mode) {
@@ -163,14 +123,17 @@ class KeyHandler(private val context: Context) : DeviceKeyHandler {
                         wasMuted = true
                     }
                 }
-                AudioManager.RINGER_MODE_VIBRATE, AudioManager.RINGER_MODE_NORMAL -> {
+                AudioManager.RINGER_MODE_VIBRATE,
+                AudioManager.RINGER_MODE_NORMAL -> {
                     setZenMode(Settings.Global.ZEN_MODE_OFF)
                     audioManager.ringerModeInternal = mode
                     if (muteMedia && wasMuted) {
                         audioManager.adjustVolume(AudioManager.ADJUST_UNMUTE, 0)
                     }
                 }
-                ZEN_PRIORITY_ONLY, ZEN_TOTAL_SILENCE, ZEN_ALARMS_ONLY -> {
+                ZEN_PRIORITY_ONLY,
+                ZEN_TOTAL_SILENCE,
+                ZEN_ALARMS_ONLY -> {
                     audioManager.ringerModeInternal = AudioManager.RINGER_MODE_NORMAL
                     setZenMode(mode - ZEN_OFFSET)
                     if (muteMedia && wasMuted) {
@@ -179,7 +142,8 @@ class KeyHandler(private val context: Context) : DeviceKeyHandler {
                 }
             }
 
-            if (vibrate) {
+            if (!firstRun) {
+                if (showDialog) sendNotification(position, mode)
                 vibrateIfNeeded(mode)
             }
         }
@@ -195,40 +159,38 @@ class KeyHandler(private val context: Context) : DeviceKeyHandler {
         }
     }
 
+    private fun sendNotification(position: Int, mode: Int) {
+        context.sendBroadcast(
+            Intent(CHANGED_ACTION).apply {
+                putExtra("position", position)
+                putExtra("mode", mode)
+            }
+        )
+    }
+
     companion object {
         private const val TAG = "KeyHandler"
 
-        // Broadcast action for slider position updates
-        const val ACTION_UPDATE_SLIDER_POSITION = "org.lineageos.settings.device.UPDATE_SLIDER_POSITION"
-        
+        // Intent actions
+        const val CHANGED_ACTION = "org.lineageos.settings.UPDATE_SETTINGS"
+
         // Slider key positions
         const val POSITION_TOP = 1
         const val POSITION_MIDDLE = 2
         const val POSITION_BOTTOM = 3
-
-        // Intent extras
-        const val EXTRA_SLIDER_POSITION = "position"
-        const val EXTRA_SLIDER_POSITION_VALUE = "position_value"
-
-        // Mode values
-        const val MODE_TOTAL_SILENCE = 600
-        const val MODE_ALARMS_ONLY = 601
-        const val MODE_PRIORITY_ONLY = 602
-        const val MODE_VIBRATE = 604
-        const val MODE_RING = 605
-        const val MODE_SILENT = 620
 
         // Preference keys
         private const val ALERT_SLIDER_TOP_KEY = "config_top_position"
         private const val ALERT_SLIDER_MIDDLE_KEY = "config_middle_position"
         private const val ALERT_SLIDER_BOTTOM_KEY = "config_bottom_position"
         private const val MUTE_MEDIA_WITH_SILENT = "config_mute_media"
+        private const val SHOW_DIALOG = "config_show_dialog"
 
         // ZEN constants
         private const val ZEN_OFFSET = 2
-        private const val ZEN_PRIORITY_ONLY = 3
-        private const val ZEN_TOTAL_SILENCE = 4
-        private const val ZEN_ALARMS_ONLY = 5
+        const val ZEN_PRIORITY_ONLY = 3
+        const val ZEN_TOTAL_SILENCE = 4
+        const val ZEN_ALARMS_ONLY = 5
 
         // Vibration attributes
         private val HARDWARE_FEEDBACK_VIBRATION_ATTRIBUTES =
