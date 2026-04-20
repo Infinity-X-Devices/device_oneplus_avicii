@@ -163,8 +163,7 @@ $(call inherit-product, hardware/dolby/dolby.mk)
 
 # Doze
 PRODUCT_PACKAGES += \
-    OplusDoze \
-    OplusDozeRes
+    OplusDoze
 
 # DRM
 PRODUCT_PACKAGES += \
