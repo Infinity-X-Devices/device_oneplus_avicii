@@ -1,0 +1,2 @@
+# Restore run-as context resolution for Android 16 / SDK 36 debuggable apps.
+user=_app minTargetSdkVersion=36 fromRunAs=true domain=runas_app levelFrom=all
