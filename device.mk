@@ -117,10 +117,6 @@ PRODUCT_COPY_FILES += \
 
 $(call soong_config_set,libcameraservice,ext_lib,//$(LOCAL_PATH):libcameraservice_extension.oneplus_avicii)
 
-# Configstore
-PRODUCT_PACKAGES += \
-    disable_configstore
-
 # Dalvik
 $(call inherit-product, frameworks/native/build/phone-xhdpi-6144-dalvik-heap.mk)
 
