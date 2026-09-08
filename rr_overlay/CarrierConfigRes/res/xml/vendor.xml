@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <carrier_config_list>
     <carrier_config>
+        <boolean name="manual_network_selection_allowed" value="true" />
         <boolean name="apn_expand_bool" value="true" />
         <boolean name="world_phone_bool" value="false" />
         <boolean name="allow_adding_apns_bool" value="true" />
