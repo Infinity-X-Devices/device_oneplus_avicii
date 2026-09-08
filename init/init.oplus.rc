@@ -63,6 +63,9 @@ on property:vendor.post_boot.parsed=1
     write /proc/irq/300/smp_affinity_list 2
     write /proc/irq/338/smp_affinity_list 1
 
+    # Enable suspend to RAM
+    write /sys/power/mem_sleep "deep"
+
 service oplus-sh /odm/bin/init.oplus.sh
     user root
     group root
