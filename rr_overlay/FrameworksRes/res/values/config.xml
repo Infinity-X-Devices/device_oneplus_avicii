@@ -708,7 +708,7 @@
     <string name="config_mms_user_agent_profile_url">http://www.google.com/oha/rdf/ua-profile-kila.xml</string>
 
     <!-- True if camera app should be pinned via Pinner Service -->
-    <bool name="config_pinnerCameraApp">true</bool>
+    <bool name="config_pinnerCameraApp">false</bool>
 
     <!-- Bytes that the PinnerService will pin for Home app -->
     <integer name="config_pinnerHomePinBytes">6291456</integer>
