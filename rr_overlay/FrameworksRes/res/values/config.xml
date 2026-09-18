@@ -354,6 +354,9 @@
          strictly needed. -->
     <bool name="config_sf_limitedAlpha">true</bool>
 
+    <!-- Whether or not wcg mode should be enabled on this device -->
+    <bool name="config_enableWcgMode">true</bool>
+
     <!-- Indicate available ColorDisplayManager.COLOR_MODE_xxx. -->
     <integer-array name="config_availableColorModes">
         <item>1</item> <!-- Vivid -->
