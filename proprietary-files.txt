@@ -877,7 +877,6 @@ vendor/lib/libqcodec2_v4l2codec.so|3047f7689ee4d35b079ae678b1ff9c90ed899449
 
 # Media (Codec2) - from NX659J RKQ1.200826.002 20221012.201513
 vendor/etc/init/vendor.qti.media.c2@1.0-service.rc|39889d85254739af552ceb852dab9a0bcea402fb
-vendor/etc/vintf/manifest/c2_manifest_vendor.xml|0e532bf1c7d6a0ee2e7e03a9cc3283a5bffc7f8e
 
 # Native public libraries
 vendor/etc/public.libraries.txt
