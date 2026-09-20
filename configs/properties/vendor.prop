@@ -138,6 +138,7 @@ vendor.camera.algo.jpeghwencode=0
 vendor.camera.aux.packageexcludelist=org.telegram.messenger,org.thunderdog.challegram,us.zoom.videomeetings
 vendor.camera.aux.packagelist=android,com.oneplus.camera
 vendor.camera.skip_unconfigure.packagelist=com.oneplus.camera
+persist.vendor.camera.perflock.enable=0
 
 # Chipset
 ro.soc.manufacturer=QTI
