@@ -161,6 +161,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml
 
+$(call soong_config_set,qtidisplay,target_uses_tp10_ubwc_for_10bit,true)
+
 # Dolby
 $(call inherit-product, hardware/dolby/dolby.mk)
 TARGET_INCLUDES_OEM_App := true
