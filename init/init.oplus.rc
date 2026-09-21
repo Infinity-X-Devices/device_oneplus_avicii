@@ -44,6 +44,14 @@ on boot
     # Sensors
     chown system system /sys/devices/platform/soc/soc:sensor_fb/adsp_notify
 
+    # Touchpanel
+    chown system system /proc/touchpanel/double_tap_enable
+    chmod 0660 /proc/touchpanel/double_tap_enable
+    chown system system /proc/touchpanel/double_tap_enable_indep
+    chmod 0660 /proc/touchpanel/double_tap_enable_indep
+    chown system system /proc/touchpanel/game_switch_enable
+    chmod 0660 /proc/touchpanel/game_switch_enable
+
     # TOF
     chown cameraserver cameraserver /dev/stmvl53l1_ranging
 

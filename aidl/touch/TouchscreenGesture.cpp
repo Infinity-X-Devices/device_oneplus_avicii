@@ -39,21 +39,23 @@ ndk::ScopedAStatus TouchscreenGesture::getSupportedGestures(std::vector<Gesture>
 }
 
 ndk::ScopedAStatus TouchscreenGesture::setGestureEnabled(const Gesture& gesture, bool enabled) {
+    if (gesture.keycode - kGestureStartKey == kGestureDoubleTap) {
+        WriteStringToFile(enabled ? "1" : "0", "/proc/touchpanel/double_tap_enable", true);
+    }
+
     int contents = 0;
 
     if (std::string tmp; ReadFileToString(kGestureEnableIndepPath, &tmp)) {
         contents = std::stoi(Trim(tmp), nullptr, 16);
-    } else {
-        return ndk::ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
-    }
-
-    if (enabled) {
-        contents |= (1 << (gesture.keycode - kGestureStartKey));
-    } else {
-        contents &= ~(1 << (gesture.keycode - kGestureStartKey));
-    }
-
-    if (!WriteStringToFile(std::to_string(contents), kGestureEnableIndepPath, true)) {
+        if (enabled) {
+            contents |= (1 << (gesture.keycode - kGestureStartKey));
+        } else {
+            contents &= ~(1 << (gesture.keycode - kGestureStartKey));
+        }
+        if (!WriteStringToFile(std::to_string(contents), kGestureEnableIndepPath, true)) {
+            return ndk::ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
+        }
+    } else if (gesture.keycode - kGestureStartKey != kGestureDoubleTap) {
         return ndk::ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
     }
 
