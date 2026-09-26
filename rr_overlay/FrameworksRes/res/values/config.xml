@@ -773,9 +773,6 @@
     <!-- Flag indicating which package name can access the persistent data partition -->
     <string name="config_persistentDataPackageName">com.google.android.gms</string>
 
-    <!-- Show battery cycle count -->
-    <bool name="config_show_battery_cycle_count" translatable="false">true</bool>
-
     <!-- List of comma separated package names for which we the system will not show crash, ANR,
          etc. dialogs. -->
     <string translatable="false" name="config_appsNotReportingCrashes">com.google.android.euicc</string>
