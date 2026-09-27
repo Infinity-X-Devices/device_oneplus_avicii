@@ -1,5 +1,6 @@
 vendor_hal_attribute(cameraMDM)
 vendor_hal_attribute(oplus_cammidasservice)
+vendor_hal_attribute(oplus_face)
 vendor_hal_attribute(oplus_performance)
 vendor_hal_attribute(oplus_project)
 vendor_hal_attribute(oplus_sensor)
