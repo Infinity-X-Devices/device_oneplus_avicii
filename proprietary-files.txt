@@ -789,17 +789,18 @@ vendor/etc/media_profiles.xml
 vendor/etc/media_profiles_vendor.xml
 vendor/lib64/libmmosal.so;MODULE_SUFFIX=_vendor
 
-# Media (Codec2) from OnePlus 8T (KB2005_14.0.0.603(EX01))
-vendor/bin/hw/vendor.qti.media.c2@1.0-service|c170ebc5a0416f609186639125132b87a5650ef8
-vendor/etc/init/vendor.qti.media.c2@1.0-service.rc|
-vendor/etc/seccomp_policy/codec2.vendor.base-arm.policy|3c396a276dfb589501105e7158459fa2d644607e 
-vendor/etc/seccomp_policy/codec2.vendor.ext-arm.policy|a134d3d5d74294ca8164056b42389b1c7dbb2b65
-vendor/lib/libqcodec2_base.so|5bec0dec355c90d2a9739105b6d9810291ab9995
-vendor/lib/libqcodec2_basecodec.so|a517b6a89bf54d58c46758621c6dce9056cb92f7
-vendor/lib/libqcodec2_core.so|b92991b36af312411eb4779fea1a5c22550c1d56
-vendor/lib/libqcodec2_platform.so|fccd9c509fbfda6a72299d90d8d680885a1238ec
-vendor/lib/libqcodec2_utils.so|48a75460f05e2fdb7260e2ab69181fd71515dbb5
-vendor/lib/libqcodec2_v4l2codec.so|3047f7689ee4d35b079ae678b1ff9c90ed899449
+# Media (Codec2) - from barbet (AP2A.240805.005)
+vendor/bin/hw/vendor.qti.media.c2@1.0-service|5a304f0d13f69ac1e20350fbe8cd9963dd95b304
+vendor/etc/init/vendor.qti.media.c2@1.0-service.rc|11209316ba8aae64b689217bc13b0804f6620678
+vendor/etc/seccomp_policy/codec2.vendor.base-arm64.policy|35979cd71f148821654d6947b400914f2752450d
+vendor/etc/seccomp_policy/codec2.vendor.ext-arm64.policy|a134d3d5d74294ca8164056b42389b1c7dbb2b65
+vendor/lib64/libmedia_ecoservice.so|b2ca0d420ea3a07eee2aabd6157df9a6f721eded|8665cbdf6bce9d6481f5d9922a4815b3a3a31f18
+vendor/lib64/libqcodec2_base.so|d804c2ea8978b99be19c8a97f96bae268b8cf852
+vendor/lib64/libqcodec2_basecodec.so|c0335c63f018ad7e5f4d4cf6d343da9e7552de22
+vendor/lib64/libqcodec2_core.so|bb406ab05ae394ef4ab6fdcbff3a8084d2ebb3af
+vendor/lib64/libqcodec2_platform.so|e144d6614fcb83410b0147f71b53c3155bbb82de
+vendor/lib64/libqcodec2_utils.so|7119fb059da12663d12b207aa5badce7193d81bd
+vendor/lib64/libqcodec2_v4l2codec.so|0ef42f4e85247d02666fd26384479393e59f81c9
 
 # Native public libraries
 vendor/etc/public.libraries.txt
