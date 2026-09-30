@@ -98,6 +98,9 @@ vendor/lib64/libaudioparsers.so
 vendor/lib64/libhdmipassthru.so
 vendor/lib64/libqtigef.so
 
+# Audio libraries - from salami (CPH2449_16.0.5.1301(EX01))
+vendor/lib64/libadm.so|8e18e5b08c492c54415e0fa2a151d9463bb81dac
+
 # Bluetooth
 vendor/bin/hw/android.hardware.bluetooth@1.0-service-qti
 vendor/etc/init/android.hardware.bluetooth@1.0-service-qti.rc
