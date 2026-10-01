@@ -93,7 +93,6 @@ TARGET_KERNEL_SOURCE := kernel/oneplus/avicii
 TARGET_KERNEL_CONFIG := avicii_defconfig
 TARGET_KERNEL_CLANG_VERSION := r596125
 TARGET_KERNEL_CLANG_PATH := $(abspath .)/prebuilts/clang/host/linux-x86/clang-$(TARGET_KERNEL_CLANG_VERSION)
-TARGET_KERNEL_NO_GCC := true
 
 # Kernel Clang Flags
 KERNEL_CC := CC=clang
