@@ -65,7 +65,7 @@ vendor/lib64/hw/com.dsi.ant@1.0-impl.so
 
 # Audio
 odm/lib64/libaudioEngineerTest.so
-vendor/lib64/hw/audio.primary.lito.so
+vendor/lib64/hw/audio.primary.lito.so|c6dcb6a839593d10c8ef20966691e2e6e047ff10
 vendor/lib64/liba2dpoffload.so
 vendor/lib64/libaudioconfigstore.so
 vendor/lib64/libbatterylistener.so
@@ -776,7 +776,7 @@ vendor/bin/msm_irqbalance
 vendor/etc/msm_irqbalance.conf
 
 # Listen
-vendor/lib64/hw/sound_trigger.primary.lito.so
+vendor/lib64/hw/sound_trigger.primary.lito.so|46b4756226b116b9d64bce551c9ff0bc25900cfa
 vendor/lib64/libcapiv2svacnn.so
 vendor/lib64/libcapiv2vop.so
 vendor/lib64/libgcs-calwrapper.so
