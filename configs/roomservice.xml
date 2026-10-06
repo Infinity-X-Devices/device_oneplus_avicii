@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  SPDX-FileCopyrightText: Project Infinity X
+  SPDX-License-Identifier: Apache-2.0
+-->
+<manifest>
+    <!-- Remotes -->
+    <remote name="gh-inf" fetch="https://github.com/Infinity-X-Devices" />
+    <remote name="gh-org" fetch="https://github.com/OnePlus-Nord-OSS-Development" />
+    <remote name="cb-org" fetch="https://codeberg.org/OnePlus-Nord-OSS-Development" />
+
+    <!-- Device -->
+    <project path="device/oneplus/camera" name="android_device_oneplus_camera" remote="gh-org" revision="main" clone-depth="1" />
+    
+    <!-- Kernel -->
+    <project path="kernel/oneplus/avicii" name="kernel_oneplus_avicii" remote="gh-inf" revision="17" clone-depth="1" />
+    
+    <!-- Vendor -->
+    <project path="vendor/oneplus/avicii" name="vendor_oneplus_avicii" remote="gh-inf" revision="17" clone-depth="1" />
+    
+    <!-- Firmware -->
+    <project path="vendor/oneplus/firmware" name="android_vendor_oneplus_firmware" remote="cb-org" revision="main" clone-depth="1" />
+    
+    <!-- OnePlus Camera -->
+    <project path="vendor/oneplus/camera" name="android_vendor_oneplus_camera" remote="cb-org" revision="main" clone-depth="1" />
+
+    <!-- Dolby Atmos + Dolby Vision -->
+    <project path="hardware/dolby" name="android_hardware_dolby" remote="gh-org" revision="sony-A17" clone-depth="1" />
+</manifest>
