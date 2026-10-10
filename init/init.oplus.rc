@@ -28,9 +28,6 @@ on early-boot
     write /sys/bus/msm_subsys/devices/subsys10/restart_level RELATED
     write /sys/bus/msm_subsys/devices/subsys11/restart_level RELATED
 
-    # Workarround for cache
-    rm /data/resource-cache
-    rm /data/system/package_cache
 
 on boot
     # Display
