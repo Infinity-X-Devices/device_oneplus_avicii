@@ -575,22 +575,28 @@ vendor/etc/init/android.hardware.gatekeeper@1.0-service-qti.rc
 vendor/lib64/hw/android.hardware.gatekeeper@1.0-impl-qti.so
 
 # Graphics (Adreno)
-vendor/lib64/egl/eglSubDriverAndroid.so
-vendor/lib64/egl/libEGL_adreno.so;SYMLINK=vendor/lib64/libEGL_adreno.so
-vendor/lib64/egl/libGLESv1_CM_adreno.so
-vendor/lib64/egl/libGLESv2_adreno.so;SYMLINK=vendor/lib64/libGLESv2_adreno.so
-vendor/lib64/egl/libq3dtools_adreno.so;SYMLINK=vendor/lib64/libq3dtools_adreno.so
-vendor/lib64/egl/libq3dtools_esx.so
 vendor/lib64/libC2D2.so
 vendor/lib64/libCB.so
 vendor/lib64/libOpenCL.so
-vendor/lib64/libVkLayer_q3dtools.so
-vendor/lib64/libadreno_utils.so
 vendor/lib64/libc2d30_bltlib.so
-vendor/lib64/libgpudataproducer.so
-vendor/lib64/libgsl.so
-vendor/lib64/libllvm-glnext.so
 vendor/lib64/libllvm-qcom.so
+
+# Graphics (Adreno) from hollywood (UP1A.231005.007.A1)
+vendor/lib64/egl/eglSubDriverAndroid.so|bdd040fc5bae0e47aec8833092550cef7b377cd1
+vendor/lib64/egl/libEGL_adreno.so;SYMLINK=vendor/lib64/libEGL_adreno.so|98dc09ab8635b9d6fc2577d4cda4407498fc7fc7
+vendor/lib64/egl/libGLESv1_CM_adreno.so|73e0f348edd3b7267a42cd31e3a0b640f0f0b1d1
+vendor/lib64/egl/libGLESv2_adreno.so;SYMLINK=vendor/lib64/libGLESv2_adreno.so|987c811709da406b194d49850f6993e1805ae217
+vendor/lib64/egl/libq3dtools_adreno.so;SYMLINK=vendor/lib64/libq3dtools_adreno.so|471b9b99a1023a39dc174ef31267b97cad2514c2
+vendor/lib64/egl/libq3dtools_esx.so|29e5421af96714aa641769651e11391ec5843d38 
+vendor/lib64/egl/libVkLayer_ADRENO_qprofiler.so|2fa3a828512eadd1afbb132099547d496ba65be2
+vendor/lib64/libadreno_app_profiles.so|fe0446685524378ecbcb793f6020b896bf7ab368
+vendor/lib64/libadreno_utils.so|af50a099cc4b3148831da0c7559431b3e12c0700
+vendor/lib64/libgpudataproducer.so|ae1e97612796a06a629f56ffb0dca4afb325b6ce
+vendor/lib64/libgsl.so|fcf96c3e126de93f61e09bdb76c3734ce1e242c2
+vendor/lib64/libkcl.so|e7acfbc5157d2d5a4ac82f16748734f26903c206
+vendor/lib64/libkernelmanager.so|350b7218a635b1618f9cf4a678c3e595181933b1
+vendor/lib64/libllvm-glnext.so|9bb680f8e41efced39c668ad03688fc9af309931
+vendor/lib64/libllvm-qgl.so|ddc4a3418cb3d62f288ae68c8921f10909895c80
 
 # Graphics (Adreno firmware)
 vendor/firmware/a650_gmu.bin
@@ -601,8 +607,8 @@ vendor/firmware/a620_zap.b02
 vendor/firmware/a620_zap.elf
 vendor/firmware/a620_zap.mdt
 
-# Graphics (Vulkan)
-vendor/lib64/hw/vulkan.adreno.so
+# Graphics (Vulkan) from hollywood (UP1A.231005.007.A1)
+vendor/lib64/hw/vulkan.adreno.so|39c8ca71a665e93c7251dc16f93d286efdce1537
 
 # GNSS
 odm/etc/izat.conf
@@ -874,6 +880,13 @@ vendor/lib64/libqmi_csi.so
 vendor/lib64/libqmi_encdec.so
 vendor/lib64/libqmi_legacy.so
 vendor/lib64/libqmiservices.so
+
+# QSPM
+vendor/bin/vendor.qti.qspmhal@1.0-service
+vendor/etc/init/vendor.qti.qspmhal@1.0-service.rc
+vendor/etc/seccomp_policy/qspm.policy
+vendor/lib64/vendor.qti.qspmhal@1.0-impl.so
+vendor/lib64/vendor.qti.qspmhal@1.0.so
 
 # RIL
 odm/lib64/vendor.oplus.hardware.appradio@1.0.so
