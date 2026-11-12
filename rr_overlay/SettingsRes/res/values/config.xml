@@ -41,4 +41,7 @@
     <!-- The radius of the enrollment progress bar, in dp -->
     <integer name="config_udfpsEnrollProgressBar" translatable="false">107</integer>
 
+    <!-- Whether Settings should open a separate camera preview during face enrollment -->
+    <bool name="config_face_enroll_hal_owns_camera">true</bool>
+
 </resources>
